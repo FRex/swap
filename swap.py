@@ -43,6 +43,11 @@ def main():
     os.rename(fname2, fname1)  # now move file 2 to now free file 1 place
     os.rename(tempname, fname2)  # now move original file 1 from temp to file 2 place
 
+    # TODO: guard this with a flag
+    # NOTE: this is so that build systems, etc. see fresher timestamps and rebuild dependent files
+    os.utime(fname1)
+    os.utime(fname2)
+
 
 if __name__ == "__main__":
     main()
