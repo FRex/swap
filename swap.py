@@ -33,6 +33,26 @@ def main():
         sys.exit(1)
 
     fname1, fname2 = sys.argv[1], sys.argv[2]
+
+    # special case: swap between two names
+    if os.path.exists(fname1) and not os.path.exists(fname2):
+        print(f"{fname2} doesn't exist, renaming {fname1} to it")
+        os.rename(fname1, fname2)
+        # TODO: guard it with a flag?
+        # TODO: is it needed?
+        # NOTE: its so that build systems, etc. see fresh timestamps and rebuild files
+        # os.utime(fname2)
+        return 0
+
+    if os.path.exists(fname2) and not os.path.exists(fname1):
+        print(f"{fname1} doesn't exist, renaming {fname2} to it")
+        os.rename(fname2, fname1)
+        # TODO: guard it with a flag?
+        # TODO: is it needed?
+        # NOTE: its so that build systems, etc. see fresh timestamps and rebuild files
+        # os.utime(fname1)
+        return 0
+
     exit2onmissing((fname1, fname2))
 
     # TODO: fallbacks (behind a cmdline option) for swapping across filesystems
