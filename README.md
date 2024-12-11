@@ -1,7 +1,8 @@
 # swap
 
 A simple Python script that takes 2 filenames and swaps those files using
-`os.rename` and then updates their modification times using `os.utime`.
+`os.rename` and then updates their modification times using `os.utime`. It's
+okay if one of the files does not exist.
 
 My use case was to edit a file, and then swap it with the original,
 recompile, and retest my program.
